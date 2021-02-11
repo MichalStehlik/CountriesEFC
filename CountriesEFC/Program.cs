@@ -10,7 +10,10 @@ namespace CountriesEFC
         static void Main(string[] args)
         {
             var db = new ApplicationDbContext();
-            foreach (var c in db.Countries.Include(c => c.Continent).ToList())
+            foreach (var c in db.Countries
+                .Include(c => c.Continent)
+                .ToList()
+            )
             {
                 Console.WriteLine(c);
             }
