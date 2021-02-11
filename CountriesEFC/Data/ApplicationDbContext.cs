@@ -1,5 +1,6 @@
 ﻿using CountriesEFC.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,13 +14,14 @@ namespace CountriesEFC.Data
         public ApplicationDbContext()
             : base()
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlite(@"Data Source=myDatabaseFile.sqlite");
+            options.LogTo(Console.WriteLine, new[] { /*CoreEventId.ContextInitialized,*/ RelationalEventId.CommandExecuted });
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
